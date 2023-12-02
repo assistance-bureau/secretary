@@ -29,11 +29,11 @@
         items = e.detail.items;
     }
 
-    import { playSound } from '../../routes/Sounds';
+    // import { playSound } from '../../utils/Sounds';
 
-    function handleHover() {
-        playSound('hover');
-    }
+    // function handleHover() {
+    //     playSound('hover');
+    // }
 
 </script>
 
@@ -44,7 +44,7 @@
         <!-- 상단바 -->
         <div class="cursor-default">
         <div class="flex justify-between items-center w-full border-b hover-area">
-            <h1 class="text-lg font-semibold text-white" on:mouseenter={handleHover}>{item.name}</h1>
+            <h1 class="text-lg font-semibold text-white">{item.name}</h1>
             <div class="opacity-0 transition-opacity buttons">
               <button>
                 <i class="fas fa-cog text-lg text-white"></i> <!-- 세팅 아이콘 -->

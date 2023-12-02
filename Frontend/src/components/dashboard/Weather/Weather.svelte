@@ -4,10 +4,10 @@
     let airQuality = null;
 
     onMount(async () => {
-        const response = await fetch('http://api.openweathermap.org/data/2.5/weather?lat=37.517&lon=127.04&appid=');
+        const response = await fetch('http://api.openweathermap.org/data/2.5/weather?lat=37.517&lon=127.04&appid=8fcd09e0f165f5bcf870ec203b83ae6c');
         weatherData = await response.json();
         weatherData.main.temp = Math.round(weatherData.main.temp - 273.15);
-        const airPollutionResponse = await fetch('http://api.openweathermap.org/data/2.5/air_pollution?lat=37.517&lon=127.04&appid=');
+        const airPollutionResponse = await fetch('http://api.openweathermap.org/data/2.5/air_pollution?lat=37.517&lon=127.04&appid=8fcd09e0f165f5bcf870ec203b83ae6c');
         const airPollutionData = await airPollutionResponse.json();
         airQuality = airPollutionData.list[0].main.aqi; // 대기 질 지수
     });

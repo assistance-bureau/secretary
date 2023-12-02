@@ -1,14 +1,16 @@
 <script lang="ts">
+import { get } from 'svelte/store';
 
 import Weather from './Weather/Weather.svelte';
+import Login from './Login/Login.svelte';
 
-let mod: string = "Weather";
-//이 mod는 외부에서 받는 값이어야 함
+import { mode } from '../../utils/Store';
+
 
 </script>
 
-{#if mod === "Weather"}
-        <Weather />
+{#if get(mode).name === "login"}
+        <Login />
 {:else}
         <h1>Not implemented yet</h1>
 {/if}

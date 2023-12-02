@@ -1,3 +1,13 @@
+<script context="module" lang="ts">
+    //profile / userinfo
+    import { isLogin, user } from '../utils/Store';
+    export async function load() {
+        const isLoggedIn = false;
+        isLogin.set(isLoggedIn);
+    }
+
+</script>
+
 <script lang="ts">
 	import '../app.postcss';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
@@ -30,11 +40,13 @@
         width: 'w-[1300px]', // 전체 화면 너비에서 16px 빼기
         // padding: 'p-4',
         rounded: 'rounded-xl',
+        opacityTransition: true,
+        duration: 500,
     };
 
     //clicks
     //sounds
-    import { playSound } from './Sounds';
+    import { playSound } from '../utils/Sounds';
 
 
     function handleClickExplorer() {
@@ -45,44 +57,49 @@
     // clock
     import ClockComponent from '../components/drawer/Clock_component.svelte';
 
-    // avatar
+    // avatar + login popups
     import AvatarComponent from '../components/drawer/Avatar_component.svelte';
+    import { Modal, getModalStore } from '@skeletonlabs/skeleton';
 
+    const modalStore = getModalStore();
 
 </script>
 
-<Drawer position="right">
-	<h1>Let's explore!</h1>
-    <DrawerComponent />
-</Drawer>
+    <Drawer position="right">
+    	<h1>Let's explore!</h1>
+        <DrawerComponent />
+    </Drawer>
 
-<!-- App Shell -->
-<AppShell>
-    <!-- 헤더 -->
-    <svelte:fragment slot="header">
-        <div class="flex flex-row justify-between">
-            <div class="font-bold">
-                <!-- 서비스 이름 -->
-                Assistant Bureau
+    <Modal />
+
+    
+    <!-- App Shell -->
+    <AppShell>
+        <!-- 헤더 -->
+        <svelte:fragment slot="header">
+            <div class="flex flex-row justify-between">
+                <div class="font-bold">
+                    <!-- 서비스 이름 -->
+                    Assistant Bureau
+                </div> 
+                <div class="mr-4"> <!-- Tailwind CSS 클래스를 사용 -->
+                    <ClockComponent/>
+                </div>
             </div>
-            <div class="mr-4"> <!-- Tailwind CSS 클래스를 사용 -->
-                <ClockComponent/>
-            </div>
-        </div>
-        
-    </svelte:fragment>
-    <svelte:fragment slot="sidebarLeft">
-        <AppRail>
+            
+        </svelte:fragment>
+        <svelte:fragment slot="sidebarLeft">
+            <AppRail>
 
-            <!-- Explorer drawer 시작화면 버튼 -->
-            <svelte:fragment slot="lead">
-                <AppRailAnchor href="/" on:click={handleClickExplorer}>
-                    <i class="fa-regular fa-compass text-4xl" style="color: white;"></i>
-                    <span>explorer</span>
-                </AppRailAnchor>
-            </svelte:fragment>
+                <!-- Explorer drawer 시작화면 버튼 -->
+                <svelte:fragment slot="lead">
+                    <AppRailAnchor href="/" on:click={handleClickExplorer}>
+                        <i class="fa-regular fa-compass text-4xl" style="color: white;"></i>
+                        <span>explorer</span>
+                    </AppRailAnchor>
+                </svelte:fragment>
 
-            <!-- 애플리케이션 리스트 -->
+                <!-- 애플리케이션 리스트 -->
             <AppRailTile bind:group={currentTile} name="tile-1" value={0} title="tile-1">
                 <svelte:fragment slot="lead">(icon)</svelte:fragment>
                 <span>Tile 1</span>
@@ -91,16 +108,12 @@
                 <svelte:fragment slot="lead">(icon)</svelte:fragment>
                 <span>Tile 2</span>
             </AppRailTile>
-            <AppRailTile bind:group={currentTile} name="tile-3" value={2} title="tile-3">
-                <svelte:fragment slot="lead">(icon)</svelte:fragment>
-                <span>Tile 3</span>
-            </AppRailTile>
             <!-- --- -->
 
             <!-- 유저 Profile -->
             <svelte:fragment slot="trail">
                 <AppRailAnchor title="Account">
-                    <div class="flex justify-center items-center mb-2 scale-0">
+                    <div class="flex justify-center items-center mb-2 scale-90">
                         <AvatarComponent/>
                     </div>
                 </AppRailAnchor>

@@ -3,21 +3,15 @@
     import Main_dashboard from '../components/dashboard/Main_dashboard.svelte';
     import { scale } from 'svelte/transition';
 
-    // 0 -> dashboard
-    // 1 -> application
-    let mod: number = 0;
-    function toggleMod() {
-        playSound('click');
-        mod = mod === 0 ? 1 : 0;
-    }
+    // 0 -> dashboard 1 -> application
+
+    import { mode } from '../utils/Store';
     // sounds
-    import { playSound } from './Sounds';
+    // import { playSound } from '../utils/Sounds';
 
 </script>
 
-<button on:click={toggleMod}>Toggle Mode</button>
-
-{#if mod === 0}
+{#if $mode.mod === 0}
     <div transition:scale={{ duration: 250 }}>
         <Main_dashboard />
     </div>
