@@ -6,9 +6,16 @@
     // 0 -> dashboard
     // 1 -> application
     let mod: number = 0;
+    function toggleMod() {
+        playSound('click');
+        mod = mod === 0 ? 1 : 0;
+    }
+    // sounds
+    import { playSound } from './Sounds';
+
 </script>
 
-<button on:click={() => mod = mod === 0 ? 1 : 0}>Toggle Mode</button>
+<button on:click={toggleMod}>Toggle Mode</button>
 
 {#if mod === 0}
     <div transition:scale={{ duration: 250 }}>

@@ -24,7 +24,7 @@
             <i class="fa-solid fa-sun icon clear text-4xl animate-spin-slow"></i>
         {/if}
         {#if weatherData.weather[0].main === 'Clouds'}
-            <i class="fa-solid fa-cloud icon clouds text-4xl"></i>
+            <i class="fa-solid fa-cloud icon clouds text-4xl animate-pulse-slow"></i>
         {/if}
         {#if weatherData.weather[0].main === 'Rain'}
             <i class="fa-solid fa-cloud-rain icon rain text-4xl animate-bounce-soft"></i>
@@ -103,5 +103,16 @@
     .animate-ping-soft {
       animation: ping-soft 1s cubic-bezier(0, 0, 0.2, 1) infinite;
     }
+    @keyframes pulse-slow {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+      .animate-pulse-slow {
+        animation: pulse-slow 2s infinite;
+      }
 </style>
   
