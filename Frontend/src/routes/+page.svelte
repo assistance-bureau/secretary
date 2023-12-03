@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ApplicationTemplate from '../components/applications/Application_template.svelte';
     import Main_dashboard from '../components/dashboard/Main_dashboard.svelte';
-    import { scale } from 'svelte/transition';
+    import { fade } from 'svelte/transition';
 
     // 0 -> dashboard 1 -> application
 
@@ -12,11 +12,11 @@
 </script>
 
 {#if $mode.mod === 0}
-    <div transition:scale={{ duration: 250 }}>
+    <div>
         <Main_dashboard />
     </div>
 {:else}
-    <div transition:scale={{ duration: 250 }}>
+    <div>
         <ApplicationTemplate />
     </div>
 {/if}

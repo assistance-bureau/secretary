@@ -1,11 +1,10 @@
 <script context="module" lang="ts">
     //profile / userinfo
-    import { isLogin, user } from '../utils/Store';
-    export async function load() {
-        const isLoggedIn = false;
-        isLogin.set(isLoggedIn);
-    }
+    import { pbStore } from '../utils/Store';
+    import { get } from 'svelte/store';
 
+    const pb = get(pbStore).pb;
+    pbStore.set({ pb: pb, isValid: pb.authStore.isValid });
 </script>
 
 <script lang="ts">
@@ -31,13 +30,27 @@
 	import DrawerComponent from '../components/drawer/Drawer_component.svelte';
     initializeStores();
 
+    import { onMount } from 'svelte';
+
+    // 창 크기 변경 감지
+    let windowWidth: number;
+
+    onMount(() => {
+      windowWidth = window.innerWidth - 16;
+      window.addEventListener('resize', () => {
+        windowWidth = window.innerWidth - 16;
+      });
+    });
+
+    $: drawerWidth = `w-[${windowWidth}px]`;
+
     const drawerStore = getDrawerStore();
     const drawerSettings: DrawerSettings = {
         id: 'explorer',
         // Provide your property overrides:
         bgDrawer: 'bg-cyan-800/60 text-white backdrop-blur', // 진한 남색으로 설정
         // bgBackdrop: 'bg-black/90', // 반투명한 검은색 배경으로 설정
-        width: 'w-[1300px]', // 전체 화면 너비에서 16px 빼기
+        width: drawerWidth, // 전체 화면 너비에서 16px 빼기
         // padding: 'p-4',
         rounded: 'rounded-xl',
         opacityTransition: true,

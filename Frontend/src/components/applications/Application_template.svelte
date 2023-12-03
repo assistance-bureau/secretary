@@ -6,6 +6,7 @@ import Login from './Login/Login.svelte';
 
 import { mode } from '../../utils/Store';
 
+$: mode;
 
 </script>
 

@@ -15,4 +15,12 @@ export interface ModeType {
 
 export const isLogin = writable<boolean>(false);
 export const user = writable<UserType | null>(null);
-export const mode = writable<ModeType>({mod: 0, name: "dashboard"});
+export const mode = writable<ModeType>({mod: 0, name: "guest"});
+
+import PocketBase from 'pocketbase';
+const pb = new PocketBase('http://192.168.50.196:8000');
+
+export const pbStore = writable({
+    pb: pb,
+    isValid: null
+});

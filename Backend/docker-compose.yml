@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  pocketbase:
+    image: pocketbase_img
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./pb_data:/pb/pb_data # 현재 디렉토리의 pb_data 폴더를 컨테이너의 /pb/pb_data에 마운트합니다.

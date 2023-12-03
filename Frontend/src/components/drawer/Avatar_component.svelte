@@ -1,33 +1,25 @@
 <script lang="ts">
     import { Avatar } from '@skeletonlabs/skeleton';
-    import { get } from 'svelte/store';
-    import { mode } from '../../utils/Store';
-    import pocketbase from 'pocketbase';
-    import type { RecordModel } from 'pocketbase'
+    import { mode, pbStore } from '../../utils/Store';
+    import type { RecordModel } from 'pocketbase';
 
     function handleClick() {
-        if (get(mode).mod === 0) {
-            mode.set({ mod: 1, name: 'login' })
+        const currentMode = $mode;
+        if (currentMode.mod === 0) {
+            mode.set({ mod: 1, name: 'login' });
         } else {
-            mode.set({ mod: 0, name: 'dashboard' })
+            mode.set({ mod: 0, name: 'dashboard' });
         }
     }
 
-    const pb = new pocketbase('http://localhost:8090');
-
-    let isValid: boolean = pb.authStore.isValid;
-    let img: any = null;
-    let user = pb.authStore.model as RecordModel; // user: AuthModel
-
-    img = pb.files.getUrl(user, user.avatar)
-
-    console.log(isValid)
-    console.log(img)
-
+    // pbStore에서 바로 구독하기
+    $: ({ pb, isValid } = $pbStore);
+    $: user = isValid ? (pb.authStore.model as RecordModel) : null;
+    $: img = isValid && user ? pb.files.getUrl(user, user.avatar) : null;
+    
 </script>
 
 <button on:click={handleClick} aria-label="Toggle Mode">
-    <!-- 스토어 값 직접 조회를 위해선 $필요 -->
     {#if isValid === true}
         <!-- 로그인한 사용자의 아바타 표시 -->
         <Avatar 
