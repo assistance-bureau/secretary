@@ -1,32 +1,76 @@
-<script>
+<script lang="ts">
     import { dndzone } from 'svelte-dnd-action';
-    import { writable } from 'svelte/store';
+    import { writable, get } from 'svelte/store';
+    import { pbStore } from '../../utils/Store';
+
+    $: ({ pb, isValid } = $pbStore);
 
     // dashboards
     import Weather from './Weather/Weather.svelte';
 
-    const gridItems = writable([
-        { id: 1, name: '날씨', type: 'Weather', status: 'Active' },
-        { id: 2, name: 'Component 2', type: 'Type B', status: 'Inactive' },
-        { id: 3, name: 'Component 3', type: 'Type B', status: 'Inactive' },
-        { id: 4, name: 'Component 4', type: 'Type B', status: 'Active' },
-        { id: 5, name: 'Component 5', type: 'Type C', status: 'Active' },
-        { id: 6, name: 'Component 6', type: 'Type C', status: 'Active' },
-        { id: 7, name: 'Component 7', type: 'Type C', status: 'Active' },
-        { id: 8, name: 'Component 8', type: 'Type C', status: 'Active' },
-        { id: 9, name: 'Component 9', type: 'Type C', status: 'Active' },
-        { id: 10, name: 'Component 10', type: 'Type D', status: 'Inactive' },
-        { id: 11, name: 'Component 11', type: 'Type D', status: 'Inactive'},
-        { id: 12, name: 'Component 12', type: 'Type D', status: 'Inactive'}
-    ]);
+    let guest_grid_items = [];
+
+    // 회원가입할때 create해야겠다.
+    if (isValid === false) {
+        guest_grid_items = [
+            { id: 1, name: '날씨', type: 'Weather', status: 'Active' },
+            { id: 2, name: 'Component 2', type: 'Type B', status: 'Inactive' },
+            { id: 3, name: 'Component 3', type: 'Type B', status: 'Inactive' },
+            { id: 4, name: 'Component 4', type: 'Type B', status: 'Inactive' },
+            { id: 5, name: 'Component 5', type: 'Type C', status: 'Inactive' },
+            { id: 6, name: 'Component 6', type: 'Type C', status: 'Inactive' },
+            { id: 7, name: 'Component 7', type: 'Type C', status: 'Inactive' },
+            { id: 8, name: 'Component 8', type: 'Type C', status: 'Inactive' },
+            { id: 9, name: 'Component 9', type: 'Type C', status: 'Inactive' },
+            { id: 10, name: 'Component 10', type: 'Type D', status: 'Inactive' },
+            { id: 11, name: 'Component 11', type: 'Type D', status: 'Inactive'},
+            { id: 12, name: 'Component 12', type: 'Type D', status: 'Inactive'}
+        ];
+    }
+
+    let grid_items = [
+        { id: 1, name: '날씨', type: 'Weather', status: true },
+        { id: 2, name: 'Component 2', type: 'Type B', status: true },
+        { id: 3, name: 'Component 3', type: 'Type B', status: true },
+        { id: 4, name: 'Component 4', type: 'Type B', status: false },
+        { id: 5, name: 'Component 5', type: 'Type C', status: false },
+        { id: 6, name: 'Component 6', type: 'Type C', status: false },
+        { id: 7, name: 'Component 7', type: 'Type C', status: false },
+        { id: 8, name: 'Component 8', type: 'Type C', status: false },
+        { id: 9, name: 'Component 9', type: 'Type C', status: false },
+        { id: 10, name: 'Component 10', type: 'Type D', status: false },
+        { id: 11, name: 'Component 11', type: 'Type D', status: false},
+        { id: 12, name: 'Component 12', type: 'Type D', status: false}
+    ];
+
+    // 직렬화와 역직렬화
+    let stringifiedGridItems = JSON.stringify(grid_items);
+
+    // // create record for grid_items -> 회원가입 초기화
+    // const data = {
+    //     "username": "test_username_update",
+    //     "emailVisibility": false,
+    //     "password": "87654321",
+    //     "passwordConfirm": "87654321",
+    //     "oldPassword": "12345678",
+    //     "name": "test",
+    //     "grid_json": "JSON"
+    // };
+
+
+    let parsedGridItems = JSON.parse(stringifiedGridItems);
+
+    const gridItems = writable(parsedGridItems);
 
     $: items = $gridItems;
 
     function handleDndConsider(e) {
         items = e.detail.items;
     }
+
     function handleDndFinalize(e) {
         items = e.detail.items;
+        console.log(items);
     }
 
     // import { playSound } from '../../utils/Sounds';
@@ -39,7 +83,7 @@
 
 <div class="grid-container" use:dndzone={{ items, dropTargetStyle: { outline: 'none' } }} on:consider={handleDndConsider} on:finalize={handleDndFinalize}>
     {#each items as item (item.id)}
-    <div class="relative {item.status === 'Inactive' ? 'grid-item hidden-item' : 'grid-item'}" style="width: 410px;"> <!-- 너비를 600px로 설정 -->
+    <div class="relative {item.status === false ? 'grid-item hidden-item' : 'grid-item'}" style="width: 410px;"> <!-- 너비를 600px로 설정 -->
 
         <!-- 상단바 -->
         <div class="cursor-default">
@@ -54,7 +98,7 @@
               </button>
             </div>
           </div>
-        <div class={item.status === 'Inactive' ? 'grid-item hidden-item' : 'grid-item'}>
+        <div class={item.status === false ? 'grid-item hidden-item' : 'grid-item'}>
                 <div class="flex justify-center items-center h-full w-full cursor-default">
                     {#if item.type === 'Weather'}
                         <Weather />
