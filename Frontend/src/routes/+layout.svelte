@@ -1,10 +1,6 @@
 <script context="module" lang="ts">
     //profile / userinfo
-    import { pbStore } from '../utils/Store';
-    import { get } from 'svelte/store';
 
-    const pb = get(pbStore).pb;
-    pbStore.set({ pb: pb, isValid: pb.authStore.isValid });
 </script>
 
 <script lang="ts">

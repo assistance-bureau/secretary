@@ -1,14 +1,13 @@
 <script lang="ts">
     import { dndzone } from 'svelte-dnd-action';
     import { writable, get } from 'svelte/store';
-    import { pbStore } from '../../utils/Store';
-
-    $: ({ pb, isValid } = $pbStore);
 
     // dashboards
     import Weather from './Weather/Weather.svelte';
 
     let guest_grid_items = [];
+
+    let isValid = false;
 
     // 회원가입할때 create해야겠다.
     if (isValid === false) {

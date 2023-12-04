@@ -10,9 +10,11 @@ $: mode;
 
 </script>
 
-{#if get(mode).name === "login"}
-        <Login />
-{:else}
-        <h1>Not implemented yet</h1>
-{/if}
+<div>
+    {#if get(mode).name === "login"}
+            <Login />
+    {:else}
+            <h1>Not implemented yet</h1>
+    {/if}
+</div>
 

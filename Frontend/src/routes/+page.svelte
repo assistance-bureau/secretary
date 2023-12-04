@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ApplicationTemplate from '../components/applications/Application_template.svelte';
     import Main_dashboard from '../components/dashboard/Main_dashboard.svelte';
-    import { fade } from 'svelte/transition';
+    import { blur } from 'svelte/transition';
 
     // 0 -> dashboard 1 -> application
 

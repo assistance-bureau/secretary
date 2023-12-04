@@ -1,7 +1,6 @@
 <script lang="ts">
     import { Avatar } from '@skeletonlabs/skeleton';
-    import { mode, pbStore } from '../../utils/Store';
-    import type { RecordModel } from 'pocketbase';
+    import { mode } from '../../utils/Store';
 
     function handleClick() {
         const currentMode = $mode;
@@ -12,11 +11,10 @@
         }
     }
 
-    // pbStore에서 바로 구독하기
-    $: ({ pb, isValid } = $pbStore);
-    $: user = isValid ? (pb.authStore.model as RecordModel) : null;
-    $: img = isValid && user ? pb.files.getUrl(user, user.avatar) : null;
-    
+    // Store에서 바로 구독하기
+    let isValid = false;
+    let img = '';
+
 </script>
 
 <button on:click={handleClick} aria-label="Toggle Mode">
