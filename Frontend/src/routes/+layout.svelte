@@ -44,7 +44,7 @@
     const drawerSettings: DrawerSettings = {
         id: 'explorer',
         // Provide your property overrides:
-        bgDrawer: 'bg-cyan-800/60 text-white backdrop-blur', // 진한 남색으로 설정
+        bgDrawer: 'bg-primary-500/60 text-white backdrop-blur', // 진한 남색으로 설정
         // bgBackdrop: 'bg-black/90', // 반투명한 검은색 배경으로 설정
         width: drawerWidth, // 전체 화면 너비에서 16px 빼기
         // padding: 'p-4',
