@@ -16,8 +16,9 @@
     import { TabGroup, Tab, TabAnchor } from '@skeletonlabs/skeleton';
     import { AppRail, AppRailTile, AppRailAnchor } from '@skeletonlabs/skeleton';
 
-    let currentPage: number = 0;
     let currentTile: number = 0;
+    $: currentTile;
+
 
     // explorer drawer
     import { Drawer, getDrawerStore } from '@skeletonlabs/skeleton';

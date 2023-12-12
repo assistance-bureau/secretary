@@ -4,6 +4,7 @@
 
     // dashboards
     import Weather from './Weather/Weather.svelte';
+    import Todo from './Todo/Todo.svelte';
 
     let guest_grid_items = [];
 
@@ -29,8 +30,8 @@
 
     let grid_items = [
         { id: 1, name: '날씨', type: 'Weather', status: true },
-        { id: 2, name: 'Component 2', type: 'Type B', status: true },
-        { id: 3, name: 'Component 3', type: 'Type B', status: true },
+        { id: 2, name: 'Todo', type: 'Todo', status: true },
+        { id: 3, name: 'Component 3', type: 'Type B', status: false },
         { id: 4, name: 'Component 4', type: 'Type B', status: false },
         { id: 5, name: 'Component 5', type: 'Type C', status: false },
         { id: 6, name: 'Component 6', type: 'Type C', status: false },
@@ -63,11 +64,11 @@
 
     $: items = $gridItems;
 
-    function handleDndConsider(e) {
+    function handleDndConsider(e : any) {
         items = e.detail.items;
     }
 
-    function handleDndFinalize(e) {
+    function handleDndFinalize(e: any) {
         items = e.detail.items;
         console.log(items);
     }
@@ -101,8 +102,8 @@
                 <div class="flex justify-center items-center h-full w-full cursor-default">
                     {#if item.type === 'Weather'}
                         <Weather />
-                    {:else if item.type === 'Type B'}
-                        <h1>Component 2</h1>
+                    {:else if item.type === 'Todo'}
+                        <Todo />
                     {:else if item.type === 'Type C'}
                         <h1>Component 3</h1>
                     {/if}
