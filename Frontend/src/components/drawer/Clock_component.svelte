@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+    import { dateTimeStore } from '../../utils/Store';
 
     let currentDateTime : string;
 
@@ -18,6 +19,7 @@
 
     function updateClock() {
         currentDateTime = getFormattedDate();
+        dateTimeStore.set(getFormattedDate());
         window.requestAnimationFrame(updateClock);
     }
 

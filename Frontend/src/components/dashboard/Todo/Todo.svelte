@@ -2,6 +2,9 @@
     import { ProgressRadial } from '@skeletonlabs/skeleton';
     import { writable, derived } from 'svelte/store';
 
+    //db에 뭐 잘 넣기 위한 시간 정보
+    import {dateTimeStore} from '../../../utils/Store';
+
     type TodoItem = {
         text: string;
         completed: boolean;
@@ -58,6 +61,7 @@
                 </label>
             {/each}
         </div>
+        {$dateTimeStore}
         <button type="button" class="btn btn-sm variant-filled mt-4" on:click={addTodo}>추가</button>
     </div>
 </div>

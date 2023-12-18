@@ -12,11 +12,12 @@
 </script>
 
 {#if $mode.mod === 0}
-    <div transition:blur={{ duration: 400 }}>
+    <div>
         <Main_dashboard />
     </div>
 {:else}
-    <div transition:blur={{ duration: 400 }}>
+    <!-- <div transition:blur={{ duration: 400 }}> -->
+    <div>
         <ApplicationTemplate />
     </div>
 {/if}

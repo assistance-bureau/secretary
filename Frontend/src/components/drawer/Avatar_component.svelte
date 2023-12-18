@@ -5,9 +5,9 @@
     function handleClick() {
         const currentMode = $mode;
         if (currentMode.mod === 0) {
-            mode.set({ mod: 1, name: 'login' });
+            mode.set({ mod: 1, name: 'Login' });
         } else {
-            mode.set({ mod: 0, name: 'dashboard' });
+            mode.set({ mod: 0, name: 'Dashboard' });
         }
     }
 

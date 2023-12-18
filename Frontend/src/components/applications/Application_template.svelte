@@ -14,7 +14,7 @@ $: mode;
 <div>
     {#if get(mode).name === "login"}
             <Login />
-    {:else if get(mode).name === "todo"}
+    {:else if get(mode).name === "Todo"}
             <Todo />
     {:else}
             <h1>Not implemented yet</h1>

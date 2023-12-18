@@ -5,7 +5,7 @@
 
 <script lang="ts">
 	import '../app.postcss';
-	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
+	import { AppShell } from '@skeletonlabs/skeleton';
 
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
@@ -17,7 +17,20 @@
     import { AppRail, AppRailTile, AppRailAnchor } from '@skeletonlabs/skeleton';
 
     let currentTile: number = 0;
-    $: currentTile;
+
+    //================mode setting per tile =========================
+    import { mode } from '../utils/Store';
+
+    $: if (currentTile === 0) {
+        mode.set({ mod: 0, name: "DashBoard" });
+    }
+    else if (currentTile === 1) {
+        console.log(currentTile)
+        mode.set({ mod: 1, name: "Todo" });
+    }
+    else if (currentTile === 2) {
+        mode.set({ mod: 1, name: "Weather" });
+    }
 
 
     // explorer drawer
@@ -76,13 +89,11 @@
 </script>
 
     <Drawer position="right">
-    	<h1>Let's explore!</h1>
         <DrawerComponent />
     </Drawer>
 
     <Modal />
 
-    
     <!-- App Shell -->
     <AppShell>
         <!-- 헤더 -->
@@ -90,7 +101,7 @@
             <div class="flex flex-row justify-between">
                 <div class="font-bold">
                     <!-- 서비스 이름 -->
-                    Assistant Bureau
+                    {$mode.name}
                 </div> 
                 <div class="mr-4"> <!-- Tailwind CSS 클래스를 사용 -->
                     <ClockComponent/>
@@ -116,7 +127,7 @@
             </AppRailTile>
             <AppRailTile bind:group={currentTile} name="tile-2" value={1} title="tile-2">
                 <svelte:fragment slot="lead">(icon)</svelte:fragment>
-                <span>Tile 2</span>
+                <span>{currentTile}</span>
             </AppRailTile>
             <!-- --- -->
 
