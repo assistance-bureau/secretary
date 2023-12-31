@@ -19,7 +19,7 @@ export async function sendRequest(ip: string, port: number, method: string, path
     const requestData = { ...customData };
 
     // API 요청 URL 구성
-    const url = `https://${ip}:${port}${path}`;
+    const url = `https://${ip}${path}`;
 
     try {
         // Axios 요청 구성
