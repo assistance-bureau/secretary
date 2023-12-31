@@ -32,8 +32,7 @@ export async function sendRequest(ip: string, port: number, method: string, path
                 "userid": userid // userid를 헤더에 추가
             },
             data: requestData,
-            withCredentials: true // 브라우저와 동일한 방식으로 요청을 보내도록 설정
-
+            withCredentials: false // 브라우저와 동일한 방식으로 요청을 보내도록 설정 안그럼 options라는 이상하걸 먼저 보냄
         };
 
         // GET 요청일 경우, 쿼리 매개변수로 requestData를 설정
