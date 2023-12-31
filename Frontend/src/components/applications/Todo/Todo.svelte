@@ -21,7 +21,7 @@
     // Todos 초기 데이터 로드
     async function fetchTodos(forceReload = false) {
         try {
-            const response = await sendRequest('34.82.225.41', 80, 'GET', '/todos/', null);
+            const response = await sendRequest('reportboard.agency', 443, 'GET', '/todos/', null);
             if (response.todos) {
                 todos.set(response.todos);
             }
@@ -49,7 +49,7 @@
     async function addTodo() {
         const newText = prompt('새 할 일을 입력하세요:');
         if (newText) {
-            await sendRequest('34.82.225.41', 80, 'POST', '/todo/', { content: newText });
+            await sendRequest('reportboard.agency', 443, 'POST', '/todo/', { content: newText });
             fetchTodos();
         }
     }
@@ -57,7 +57,7 @@
     async function toggleTodo(id: number, completed: boolean) {
     try {
         // content 필드를 보내지 않고, completed 상태만 전달합니다.
-        await sendRequest('34.82.225.41', 80, 'PUT', `/todo/${id}`, { completed: !completed });
+        await sendRequest('reportboard.agency', 443, 'PUT', `/todo/${id}`, { completed: !completed });
         fetchTodos();
     } catch (error) {
         console.error('Error updating todo:', error);
@@ -70,7 +70,7 @@
         const newText = prompt('할 일을 수정하세요:');
         if (newText) {
             try {
-                await sendRequest('34.82.225.41', 80, 'PUT', `/todo/edit/${todoId}`, { content: newText });
+                await sendRequest('reportboard.agency', 443, 'PUT', `/todo/edit/${todoId}`, { content: newText });
                 fetchTodos();
             } catch (error) {
                 console.error('Error editing todo:', error);
@@ -82,7 +82,7 @@
     // Todo 항목 삭제
     async function deleteTodo(todoId: number) {
         try {
-            await sendRequest('34.82.225.41', 80, 'DELETE', `/todo/${todoId}`, {});
+            await sendRequest('reportboard.agency', 443, 'DELETE', `/todo/${todoId}`, {});
             todos.update(currentTodos => currentTodos.filter(todo => todo.id !== todoId));
         } catch (error) {
             console.error('Error deleting todo:', error);
