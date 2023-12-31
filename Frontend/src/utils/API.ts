@@ -31,7 +31,9 @@ export async function sendRequest(ip: string, port: number, method: string, path
                 "Authorization": `Bearer ${token}`, // 토큰을 Authorization 헤더에 추가
                 "userid": userid // userid를 헤더에 추가
             },
-            data: requestData
+            data: requestData,
+            withCredentials: true // 브라우저와 동일한 방식으로 요청을 보내도록 설정
+
         };
 
         // GET 요청일 경우, 쿼리 매개변수로 requestData를 설정
