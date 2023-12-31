@@ -78,10 +78,29 @@
 
     // avatar + login popups
     import AvatarComponent from '../components/drawer/Avatar_component.svelte';
+    import LoginPopupComponent from '../components/drawer/Login_popup_component.svelte';
     import { Modal, getModalStore } from '@skeletonlabs/skeleton';
 
     const modalStore = getModalStore();
 
+   
+    
+    // pop-ups
+    import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
+    import { storePopup } from '@skeletonlabs/skeleton';
+    storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
+    import { popup } from '@skeletonlabs/skeleton';
+    import type { PopupSettings } from '@skeletonlabs/skeleton';
+
+    const popupFeatured: PopupSettings = {
+    	// Represents the type of event that opens/closed the popup
+    	event: 'click',
+    	// Matches the data-popup value on your popup element
+    	target: 'popupFeatured',
+    	// Defines which side of your trigger the popup will appear
+    	placement: 'bottom',
+    };
+			
 </script>
     <Drawer position="right">
         <DrawerComponent />
@@ -105,7 +124,7 @@
             
         </svelte:fragment>
         <svelte:fragment slot="sidebarLeft">
-            <AppRail>
+            <AppRail background='bg-primary-800'>
 
                 <!-- Explorer drawer 시작화면 버튼 -->
                 <svelte:fragment slot="lead">
@@ -129,13 +148,19 @@
             <!-- 유저 Profile -->
             <svelte:fragment slot="trail">
                 <AppRailAnchor title="Account">
-                    <div class="flex justify-center items-center mb-2 scale-90">
+                    <div class="flex justify-center items-center mb-2 scale-90" use:popup={popupFeatured}>
                         <AvatarComponent/>
                     </div>
                 </AppRailAnchor>
             </svelte:fragment>
 
-
+            <!-- 로그인 팝업 -->
+            <div class="card p-4 w-72 shadow-xl" data-popup="popupFeatured">
+            	<div>
+                    <LoginPopupComponent/>
+                </div>
+            </div>
+					
         </AppRail>
     </svelte:fragment>
 	<!-- Router Slot -->

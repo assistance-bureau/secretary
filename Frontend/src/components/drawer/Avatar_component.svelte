@@ -2,22 +2,13 @@
     import { Avatar } from '@skeletonlabs/skeleton';
     import { mode } from '../../utils/Store';
 
-    function handleClick() {
-        const currentMode = $mode;
-        if (currentMode.mod === 0) {
-            mode.set({ mod: 1, name: 'Login' });
-        } else {
-            mode.set({ mod: 0, name: 'Dashboard' });
-        }
-    }
-
     // Store에서 바로 구독하기
     let isValid = false;
     let img = '';
 
 </script>
 
-<button on:click={handleClick} aria-label="Toggle Mode">
+<button aria-label="Toggle Mode">
     {#if isValid === true}
         <!-- 로그인한 사용자의 아바타 표시 -->
         <Avatar 
