@@ -7,11 +7,6 @@
 	import '../app.postcss';
 	import { AppShell } from '@skeletonlabs/skeleton';
 
-	// Floating UI for Popups
-	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
-	import { storePopup } from '@skeletonlabs/skeleton';
-	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
-
     // app rail, tabs
     import { TabGroup, Tab, TabAnchor } from '@skeletonlabs/skeleton';
     import { AppRail, AppRailTile, AppRailAnchor } from '@skeletonlabs/skeleton';
@@ -25,12 +20,13 @@
         mode.set({ mod: 0, name: "DashBoard" });
     }
     else if (currentTile === 1) {
-        console.log(currentTile)
-        mode.set({ mod: 1, name: "Todo" });
+        mode.set({ mod: 0, name: "Todo" });
     }
     else if (currentTile === 2) {
-        mode.set({ mod: 1, name: "Weather" });
+        mode.set({ mod: 0, name: "Weather" });
     }
+
+
 
 
     // explorer drawer
@@ -86,7 +82,10 @@
 
     const modalStore = getModalStore();
 
+    import { autoModeWatcher } from '@skeletonlabs/skeleton';
+
 </script>
+    <svelte:head>{@html `<script>${autoModeWatcher.toString()} autoModeWatcher();</script>`}</svelte:head>
 
     <Drawer position="right">
         <DrawerComponent />

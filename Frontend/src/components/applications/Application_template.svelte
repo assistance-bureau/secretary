@@ -1,23 +1,20 @@
 <script lang="ts">
-import { get } from 'svelte/store';
+    import Weather from './Weather/Weather.svelte';
+    import Login from './Login/Login.svelte';
+    import Todo from './Todo/Todo.svelte';
 
-import Weather from './Weather/Weather.svelte';
-import Login from './Login/Login.svelte';
-import Todo from './Todo/Todo.svelte';
+    import { mode } from '../../utils/Store';
 
-import { mode } from '../../utils/Store';
-
-$: mode;
-
+    $: currentApp = $mode.name; //스토어 참조, 업데이트
 </script>
 
 <div>
-    {#if get(mode).name === "login"}
-            <Login />
-    {:else if get(mode).name === "Todo"}
-            <Todo />
+    {#if currentApp === "login"}
+        <Login />
+    {:else if currentApp === "Todo"}
+        <Todo />
     {:else}
-            <h1>Not implemented yet</h1>
+        <h1>Not implemented yet</h1>
+        <Weather />
     {/if}
 </div>
-
