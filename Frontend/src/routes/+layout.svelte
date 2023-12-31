@@ -82,11 +82,7 @@
 
     const modalStore = getModalStore();
 
-    import { autoModeWatcher } from '@skeletonlabs/skeleton';
-
 </script>
-    <svelte:head>{@html `<script>${autoModeWatcher.toString()} autoModeWatcher();</script>`}</svelte:head>
-
     <Drawer position="right">
         <DrawerComponent />
     </Drawer>
