@@ -1,0 +1,9 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://secretary:3306/secretarydb
+    username: secretary
+    password: secretary1234!
+    driver-class-name: com.mysql.cj.jdbc.Driver
